@@ -19,6 +19,7 @@ const Scratch3SpeechBlocks = require('../extensions/scratch3_speech');
 const Scratch3Speech2Blocks = require('../extensions/scratch3_speech2');
 const Ozymandias = require('../extensions/ozymandias');
 const Three = require('../extensions/three');
+const Scratch3d = require('../extensions/scratch3d');
 
 const builtinExtensions = {
     pen: Scratch3PenBlocks,
@@ -32,7 +33,8 @@ const builtinExtensions = {
 
     speech2: Scratch3Speech2Blocks,
     ozymandias: Ozymandias,
-    three: Three
+    three: Three,
+    scratch3d: Scratch3d
 };
 
 /**
