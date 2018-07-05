@@ -16,6 +16,10 @@ const Scratch3TranslateBlocks = require('../extensions/scratch3_translate');
 const Scratch3VideoSensingBlocks = require('../extensions/scratch3_video_sensing');
 const Scratch3SpeechBlocks = require('../extensions/scratch3_speech');
 
+const Scratch3Speech2Blocks = require('../extensions/scratch3_speech2');
+const Ozymandias = require('../extensions/ozymandias');
+const Three = require('../extensions/three');
+
 const builtinExtensions = {
     pen: Scratch3PenBlocks,
     wedo2: Scratch3WeDo2Blocks,
@@ -24,7 +28,11 @@ const builtinExtensions = {
     speak: Scratch3SpeakBlocks,
     translate: Scratch3TranslateBlocks,
     videoSensing: Scratch3VideoSensingBlocks,
-    speech: Scratch3SpeechBlocks
+    speech: Scratch3SpeechBlocks,
+
+    speech2: Scratch3Speech2Blocks,
+    ozymandias: Ozymandias,
+    three: Three
 };
 
 /**
