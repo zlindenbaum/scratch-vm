@@ -55,6 +55,7 @@ var liveURL = "http://scratch3d.github.io/tierOne%20/Scratch3D_Beta/server/scrat
 var raycaster = null;
 
 var Scratch3d = function() {
+
 };
 
 var ext = Scratch3d.prototype;
