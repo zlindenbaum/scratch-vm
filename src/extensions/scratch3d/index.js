@@ -178,10 +178,15 @@ ext.testAlert = function() {
 
 
 
-ext.initWorld = function(scene, width, height, callback) {
+ext.initWorld = function(args) {
+// ext.initWorld = function(scene, width, height, callback) {
     //Opens the three.js window
     //win = window.open (liveURL, "", "width=window.width, height=window.height");
     //Test URLS
+
+    var scene = args.SCENES;
+    var width = args.WIDTH;
+    var height = args.HEIGHT;
 
     //Clear data from past runs
     collisions = null;
@@ -241,7 +246,8 @@ ext.initWorld = function(scene, width, height, callback) {
     setTimeout(function() {
         var message = "INIT_" + scene + "," + width + "," + height;
         win.postMessage(message, liveURL);
-        callback(); //Calls back to Scaratch proggram to allow exicution flow to reStart once the page has been loaded
+        // callback(); //Calls back to Scaratch proggram to allow exicution flow to reStart once the page has been loaded
+        Scratch3d();
     }, 3000);
 };
 
