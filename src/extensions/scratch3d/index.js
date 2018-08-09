@@ -310,8 +310,46 @@ ext.getInfo = function() {
                         defaultValue: 0
                     }
                 }
-            }
+            },
 
+            {
+                opcode: 'rotateShape',
+                text: 'Rotate [SHAPE] [AXIS] Degrees: [DEGREES]',
+                func: 'testAlert',
+
+                arguments: {
+                    SHAPE: {
+                        type: ArgumentType.STRING,
+                        defaultValue: 'Variable'
+                    },
+
+                    AXIS: {
+                        type: ArgumentType.STRING,
+                        menu: 'Axis3',
+                        defaultValue: 'Y'
+                    },
+
+                    DEGREES: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 1
+                    }
+                }
+            },
+
+            {
+                opcode: 'keyPressed',
+                text: 'When [KEYS] Pressed',
+                blockType: BlockType.HAT,
+                func: 'testAlert',
+
+                arguments: {
+                    KEYS: {
+                        type: ArgumentType.STRING,
+                        menu: 'Keys',
+                        defaultValue: 'space'
+                    }
+                }
+            }
         ],
 
         menus: {
