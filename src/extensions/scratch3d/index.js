@@ -51,25 +51,21 @@ var charecters = [];
 //var liveURL = "http://goodwinj14.github.io/Scratch3D_Beta/server/scratch3d.html";
 var liveURL = "http://scratch3d.github.io/tierOne%20/Scratch3D_Beta/server/scratch3d.html";
 
-
 var raycaster = null;
 
-var Scratch3d = function() {
-
-};
+var Scratch3d = function(){};
 
 var ext = Scratch3d.prototype;
 
 ext.getInfo = function() {
-
-
     var info = {
         id: 'scratch3d',
         name: 'Scratch3D',
         menuIconURI: menuIconURI,
         blockIconURI: iconURI,
 
-        blocks: [{
+        blocks: [
+            {
                 opcode: 'testAlert',
                 text: 'Alert the tester',
                 blockType: BlockType.COMMAND,
@@ -104,7 +100,7 @@ ext.getInfo = function() {
             {
                 opcode: 'camControls',
                 text: 'Add Camera Controls [CAMERACONTROLS] Move Speed: [MOVESPEED] Look Speed: [LOOKSPEED]',
-                func: 'testAlert',
+                func: 'camControls',
 
                 arguments: {
                     CAMERACONTROLS: {
@@ -142,8 +138,179 @@ ext.getInfo = function() {
                         defaultValue: 1
                     }
                 }
-            }
+            },
 
+            {
+                opcode: 'rotateCamera',
+                text: 'Rotate Camera [CAMERAROTATION] [DEGREES]',
+                func: 'rotateCamera',
+
+                arguments: {
+                    CAMERAROTATION: {
+                        type: ArgumentType.STRING,
+                        menu: 'CameraRotation',
+                        defaultValue: 'Direction'
+                    },
+
+                    DEGREES: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 1
+                    }
+                }
+
+            },
+
+            {
+                opcode: 'createShape',
+                text: 'New Shape [SHAPES] Size: [SIZE] Location X: [X] Y: [Y] Z: [Z]',
+                blockType: BlockType.REPORTER,
+                func: 'createShape',
+
+                arguments: {
+                    SHAPES: {
+                        type: ArgumentType.STRING,
+                        menu: 'Shapes',
+                        defaultValue: 'Cube'
+                    },
+
+                    SIZE: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 1
+                    },
+
+                    X: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 1
+                    },
+
+                    Y: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 1
+                    },
+
+                    Z: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    }
+                }
+            },
+
+            {
+                opcode: 'createText',
+                //FIXME: program breaks when first character is string
+                text: ' 3D Text: [TEXT] Size: [SIZE] Location: X: [X] Y: [Y] Z: [Z]',
+                blockType: BlockType.REPORTER,
+                func: 'testAlert',
+
+                arguments: {
+                    TEXT: {
+                        type: ArgumentType.STRING,
+                        defaultValue: 'Hello World'
+                    },
+
+                    SIZE: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0.5
+                    },
+
+                    X: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    },
+
+                    Y: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    },
+
+                    Z: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    }
+                }
+            },
+
+            {
+                opcode: 'addCharacter',
+                text: 'New [CHARACTERS] Location: X: [X] Y: [Y] Z: [Z]',
+                blockType: BlockType.REPORTER,
+                func: 'testAlert',
+
+                arguments: {
+                    CHARACTERS: {
+                        type: ArgumentType.STRING,
+                        menu: 'Characters',
+                        defaultValue: 'Marine'
+                    },
+
+                    X: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    },
+
+                    Y: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    },
+
+                    Z: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    }
+                }
+            },
+
+            {
+                opcode: 'moveShape',
+                text: 'Move [SHAPE] [MOVE] [STEPS] Steps',
+                func: 'testAlert',
+
+                arguments: {
+                    SHAPE: {
+                        type: ArgumentType.STRING,
+                        defaultValue: 'Variable'
+                    },
+
+                    MOVE: {
+                        type: ArgumentType.STRING,
+                        menu: 'Move',
+                        defaultValue: 'Left'
+                    },
+
+                    STEPS: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 1
+                    }
+                }
+            },
+
+            {
+                opcode: 'goto',
+                text: 'Object: [OBJECT] Go To X: [X] Y: [Y] Z: [Z]',
+                func: 'testAlert',
+
+                arguments: {
+                    OBJECT: {
+                        type: ArgumentType.STRING,
+                        defaultValue: 'Variable'
+                    },
+
+                    X: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    },
+
+                    Y: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    },
+
+                    Z: {
+                        type: ArgumentType.NUMBER,
+                        defaultValue: 0
+                    }
+                }
+            }
 
         ],
 
@@ -161,11 +328,11 @@ ext.getInfo = function() {
             Materials: ['MeshBasicMaterial', 'MeshNormalMaterial', 'MeshDepthMaterial', 'MeshLambertMaterial', 'MeshPhongMaterial'],
             Images: ['Crate', 'Brick', 'Earth', 'Moon', 'Grass', 'dirt'],
             Keys: ['space', 'up arrow', 'down arrow', 'right arrow', 'left arrow', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ],
-            Charecters: ['Marine', 'Car', 'Cat', 'Cat1', 'Lego Vader', 'Pirate Ship'],
+            Characters: ['Marine', 'Car', 'Cat', 'Cat1', 'Lego Vader', 'Pirate Ship'],
             Lights: ['Ambient', 'Directional', 'Point'],
             Axis3: ['X', 'Y', 'Z'],
             Axis2: ['X', 'Y'],
-            MouseOptions: ['Click', 'Down', 'Up', 'Double Click'],
+            MouseOptions: ['Click', 'Down', 'Up', 'Double Click']
         }
     };
 
@@ -173,10 +340,8 @@ ext.getInfo = function() {
 };
 
 ext.testAlert = function() {
-    alert("Hi, mom!");
+    alert("Hi, mom! actually no");
 };
-
-
 
 ext.initWorld = function(args) {
 // ext.initWorld = function(scene, width, height, callback) {
@@ -229,6 +394,7 @@ ext.initWorld = function(args) {
             }
         }
     }
+
     win = window.open(liveURL, "", "width=window.width, height=window.height");
     //newSession = false;
     /*
@@ -247,12 +413,24 @@ ext.initWorld = function(args) {
         var message = "INIT_" + scene + "," + width + "," + height;
         win.postMessage(message, liveURL);
         // callback(); //Calls back to Scaratch proggram to allow exicution flow to reStart once the page has been loaded
+        
+        // alert("done");
+
+        // TODO: figure out some way to callback to main extension process; this doesn't work
         Scratch3d();
     }, 3000);
 };
 
+ext.camControls = function(args) {
+		var message = "SETCAMERACONTROLS_"+args.CAMERACONTROLS+','+args.MOVESPEED+','+args.LOOKSPEED;
+		win.postMessage(message, liveURL);
+};
 
+ext.rotateCamera = function(args) {};
 
+ext.createShape = function(args) {};
+
+ext.createText = function(args) {};
 
 ext._shutdown = function() {};
 
