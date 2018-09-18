@@ -31,18 +31,16 @@ const builtinExtensions = {
     text2speech: Scratch3Text2SpeechBlocks,
     translate: Scratch3TranslateBlocks,
     videoSensing: Scratch3VideoSensingBlocks,
-<<<<<<< HEAD
     speech: Scratch3SpeechBlocks,
 
     speech2: Scratch3Speech2Blocks,
     ozymandias: Ozymandias,
     three: Three,
     scratch3d: Scratch3d,
-    firmata: Firmata
-=======
+    firmata: Firmata,
+
     speech2text: Scratch3Speech2TextBlocks,
     ev3: Scratch3Ev3Blocks
->>>>>>> upstream/develop
 };
 
 /**
