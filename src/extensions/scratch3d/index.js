@@ -1,5 +1,6 @@
 var BlockType = require('../../extension-support/block-type');
 var ArgumentType = require('../../extension-support/argument-type');
+var ExtensionManager = require('../../extension-support/extension-manager');
 var THREE = require('three');
 
 
@@ -387,6 +388,8 @@ ext.initWorld = function(args) {
     //win = window.open (liveURL, "", "width=window.width, height=window.height");
     //Test URLS
 
+    console.log(args);
+
     var scene = args.SCENES;
     var width = args.WIDTH;
     var height = args.HEIGHT;
@@ -405,6 +408,8 @@ ext.initWorld = function(args) {
         //The command key is experes by KEYNAME_ the key name allows use to know what the message 
         //Type is.
         //Retrevies the command Key of the message denoting which function to call
+        console.log(event);
+
         var commandKey = null;
 
         if (event.data.eventType != null) {
@@ -424,7 +429,7 @@ ext.initWorld = function(args) {
                 for (var i = objSpilt.length - 2; i >= 0; i--) {
                     temp = objSpilt[i].split(":");
                     collisionData[temp[0]] = temp[1].split(",");
-                };
+                }
                 collisions = new Object({
                     data: collisionData
                 });
@@ -439,7 +444,7 @@ ext.initWorld = function(args) {
      **Checks Browser Version in win returns null
      **
      */
-    if (win == null) {
+    if (win === null) {
         var browserData = navigator.userAgent;
         if (browserData.indexOf("Safari") > -1) {
             alert("This extension must open in a separate window. \rTo run please enable pop-ups from this site. \rTo enable PopUps: \rClick Safari, \rClick Preferences, \rClick security, \rUncheck Block pop-up windows, \rThen refresh page. ");
@@ -455,7 +460,8 @@ ext.initWorld = function(args) {
         // alert("done");
 
         // TODO: figure out some way to callback to main extension process; this doesn't work
-        Scratch3d();
+        // Scratch3d();
+        ExtensionManager.refreshBlocks();
     }, 3000);
 };
 
