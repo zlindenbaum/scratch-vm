@@ -89,10 +89,8 @@ class Scratch3TranslateBlocks {
             name: formatMessage({
                 id: 'translate.categoryName',
                 default: 'Translate',
-                description: 'Label for the translate extension category'
+                description: 'Name of extension that adds translate blocks'
             }),
-            menuIconURI: '', // TODO: Add the final icons.
-            blockIconURI: '',
             blocks: [
                 {
                     opcode: 'getTranslate',
@@ -122,7 +120,7 @@ class Scratch3TranslateBlocks {
                     opcode: 'getViewerLanguage',
                     text: formatMessage({
                         id: 'translate.viewerLanguage',
-                        default: 'viewer language',
+                        default: 'language',
                         description: 'the languge of the project viewer'
                     }),
                     blockType: BlockType.REPORTER,
